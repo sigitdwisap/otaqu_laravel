@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\FallbackController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +16,59 @@ use App\Http\Controllers\EmployeesController;
 |
 */
 
-Route::resource('employee', EmployeesController::class);
+// // GET
+// Route::get('/employee', [EmployeesController::class, 'index'])->name('employee.index');
+// Route::get('/employee/{id}', [EmployeesController::class, 'show'])->name('employee.show');
+// // Route::get('/employee/{id}', [EmployeesController::class, 'show'])->whereNumber('id');
+// // Route::get('/employee/{name}', [EmployeesController::class, 'show'])->whereAlpha('name');
+// // Route::get('/employee/{id}/{name}', [EmployeesController::class, 'show'])
+// //     ->where([
+// //         'id' => '[0-9]+',
+// //         'name' => '[A-Za-z]+'
+// //     ]);
+// // Route::get('/employee/{id}/{name}', [EmployeesController::class, 'show'])
+// //     ->whereNumber('id')
+// //     ->whereAlpha('name');
+
+// // POST
+// Route::get('/employee/create', [EmployeesController::class, 'create'])->name('employee.create');
+// Route::post('/employee', [EmployeesController::class, 'store'])->name('employee.store');
+
+// // PUT or PATCH
+// Route::get('/employee/edit/{id}', [EmployeesController::class, 'edit'])->name('employee.edit');
+// Route::patch('/employee/{id}', [EmployeesController::class, 'update'])->name('employee.update');
+
+// // DELETE
+// Route::delete('/employee/{id}', [EmployeesController::class, 'destroy'])->name('employee.destroy');
+
+Route::prefix('/employee')->group(function () {
+    // GET
+    Route::get('/', [EmployeesController::class, 'index'])->name('employee.index');
+    Route::get('/{id}', [EmployeesController::class, 'show'])->name('employee.show');
+
+    // POST
+    Route::get('/create', [EmployeesController::class, 'create'])->name('employee.create');
+    Route::post('/', [EmployeesController::class, 'store'])->name('employee.store');
+
+    // PUT or PATCH
+    Route::get('/edit/{id}', [EmployeesController::class, 'edit'])->name('employee.edit');
+    Route::patch('/{id}', [EmployeesController::class, 'update'])->name('employee.update');
+
+    // DELETE
+    Route::delete('/{id}', [EmployeesController::class, 'destroy'])->name('employee.destroy');
+});
+
+// Route::resource('employee', EmployeesController::class);
+
+// Route for invoke method
+Route::get('/', HomeController::class);
+
+// Multiple HTTP verbs
+// Route::match(['GET', 'POST'], '/employee', [EmployeesController::class, 'index']);
+// Route::any('/employee', [EmployeesController::class, 'index']);
+
+// Return view
+// Route::view('/employee', 'employee.index', ['title' => 'Otaqu Project']);
+
+// Fallback Route
+Route::fallback(FallbackController::class);
