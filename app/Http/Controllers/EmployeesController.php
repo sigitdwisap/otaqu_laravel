@@ -94,6 +94,20 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+        $employee->delete();
+        return Redirect('/employee');
+    }
+
+    public function destroy_checklist(Request $request, $id)
+    {
+        if (isset($request->delete_employee)) {
+            $id_checklist = $_POST['delete_employee'];
+            foreach ($id_checklist as $key => $value) {
+                $employee = Employee::where('id', $value)->first();
+                $employee->delete();
+            }
+        }
+        return Redirect('/employee');
     }
 }

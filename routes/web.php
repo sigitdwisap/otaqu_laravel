@@ -56,7 +56,9 @@ Route::prefix('/employee')->group(function () {
     Route::post('/{id}', [EmployeesController::class, 'update'])->name('employee.update');
 
     // DELETE
-    Route::delete('/{id}', [EmployeesController::class, 'destroy'])->name('employee.destroy');
+    // Route::delete('/delete/{id}', [EmployeesController::class, 'destroy'])->name('employee.destroy');
+    Route::get('/delete/{id}', [EmployeesController::class, 'destroy'])->name('employee.destroy');
+    Route::post('/delete_checklist/{id}', [EmployeesController::class, 'destroy_checklist'])->name('employee.destroy_checklist');
 });
 
 // Route::resource('employee', EmployeesController::class);
