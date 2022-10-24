@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-xs-12">
                                     <div class="form-group row">
-                                        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                                        <label for="name" class="col-md-4 col-form-label">Name</label>
                                         <div class="col-md-8">
                                             <input id="name" type="text" class="form-control" name="name">
                                         </div>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-md-6 col-xs-12">
                                     <div class="form-group row">
-                                        <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone</label>
+                                        <label for="phone_number" class="col-md-4 col-form-label">Phone</label>
                                         <div class="col-md-8">
                                             <input id="phone_number" type="text" class="form-control" name="phone_number">
                                         </div>
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-6 col-xs-12">
                                     <div class="form-group row">
-                                        <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                                        <label for="email" class="col-md-4 col-form-label">Email</label>
                                         <div class="col-md-8">
                                             <input id="email" type="text" class="form-control" name="email">
                                         </div>
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-md-6 col-xs-12">
                                     <div class="form-group row">
-                                        <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
+                                        <label for="address" class="col-md-4 col-form-label">Address</label>
                                         <div class="col-md-8">
                                             <input id="address" type="text" class="form-control" name="address">
                                         </div>
@@ -85,7 +85,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($employees as $employee)
+                                    <!-- @foreach ($employees as $employee)
                                     <tr>
                                         <td>{{$employee->name}}</td>
                                         <td>{{$employee->phone_number}}</td>
@@ -100,7 +100,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @endforeach -->
                                 </tbody>
                             </table>
 
@@ -113,9 +113,44 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
-            $('#employeesTable').DataTable();
+            $('#employeesTable').DataTable({
+                processing: true,
+                searchable: true,
+                serverSide: true,
+                ajax: 'employee_json',
+                columns: [{
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'phone_number',
+                        name: 'phone_number'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'address',
+                        name: 'address'
+                    },
+                    {
+                        data: '',
+                        render: (data, type, row) => {
+                            return `
+                                <a href="<?php echo url('employee/edit'); ?>/${row.id}">
+                                    <button class="btn btn-primary">Edit</button>
+                                </a>
+                                <a href="<?php echo url('employee/delete'); ?>/${row.id}">
+                                    <button class="btn btn-danger">Delete</button>
+                                </a>
+                            `;
+                        }
+                    },
+                ],
+            });
         });
     </script>
 </body>

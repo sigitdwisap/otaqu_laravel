@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Exports\EmployeesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\DataTables;
 
 class EmployeesController extends Controller
 {
@@ -16,8 +17,13 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::limit(10000)->get();
         return view('employee.index', compact('employees'));
+    }
+
+    public function json()
+    {
+        return Datatables::of(Employee::limit(10))->make(true);
     }
 
     /**
