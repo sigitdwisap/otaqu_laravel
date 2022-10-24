@@ -36,7 +36,13 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee();
+        $employee->name = $request->name;
+        $employee->phone_number = $request->phone_number;
+        $employee->email = $request->email;
+        $employee->address = $request->address;
+        $employee->save();
+        return Redirect('/employee');
     }
 
     /**

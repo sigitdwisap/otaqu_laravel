@@ -11,27 +11,88 @@
 </head>
 
 <body>
-    <div class="container mt-5">
-        <table id="employeesTable">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($employees as $employee)
-                <tr>
-                    <td>{{$employee->name}}</td>
-                    <td>{{$employee->phone_number}}</td>
-                    <td>{{$employee->email}}</td>
-                    <td>{{$employee->address}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Employees</div>
+                    <div class="card-body">
+                        <h5>Add Employee Data</h5>
+                        <form method="POST" action="{{url('employee')}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                                        <div class="col-md-8">
+                                            <input id="name" type="text" class="form-control" name="name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group row">
+                                        <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone</label>
+                                        <div class="col-md-8">
+                                            <input id="phone_number" type="text" class="form-control" name="phone_number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group row">
+                                        <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                                        <div class="col-md-8">
+                                            <input id="email" type="text" class="form-control" name="email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group row">
+                                        <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
+                                        <div class="col-md-8">
+                                            <input id="address" type="text" class="form-control" name="address">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-8">
+                                            <button class="btn btn-success">Create</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="employeesTable" class="table table-responsive table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($employees as $employee)
+                                <tr>
+                                    <td>{{$employee->name}}</td>
+                                    <td>{{$employee->phone_number}}</td>
+                                    <td>{{$employee->email}}</td>
+                                    <td>{{$employee->address}}</td>
+                                    <td>
+                                        <button class="btn btn-primary">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
