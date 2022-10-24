@@ -61,6 +61,8 @@ Route::prefix('/employee')->group(function () {
     Route::post('/delete_checklist/{id}', [EmployeesController::class, 'destroy_checklist'])->name('employee.destroy_checklist');
 });
 
+Route::get('/employee_export', [EmployeesController::class, 'export'])->name('employee.export');
+
 // Route::resource('employee', EmployeesController::class);
 
 // Route for invoke method

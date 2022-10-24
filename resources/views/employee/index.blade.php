@@ -63,43 +63,54 @@
                             </div>
                         </form>
                     </div>
-                    <form method="POST" action="{{url('employee/delete_checklist/{id}')}}">
-                        @csrf
-                        <div class="table-responsive">
-                            <table id="employeesTable" class="table table-responsive table-striped table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th><input type="checkbox" class="checkbox" id="delete_data" name="delete_data"></th>
-                                        <th>Name</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Address</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($employees as $employee)
-                                    <tr>
-                                        <td><input type="checkbox" class="checkbox-inline" name="delete_employee[]" value="{{$employee->id}}"></td>
-                                        <td>{{$employee->name}}</td>
-                                        <td>{{$employee->phone_number}}</td>
-                                        <td>{{$employee->email}}</td>
-                                        <td>{{$employee->address}}</td>
-                                        <td>
-                                            <a href="{{url('employee/edit/'.$employee->id)}}">
-                                                <button class="btn btn-primary">Edit</button>
-                                            </a>
-                                            <a href="{{url('employee/delete/'.$employee->id)}}">
-                                                <button class="btn btn-danger">Delete</button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <input type="submit" class="btn btn-danger" name="delete_data" value="Delete marked employee datas">
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <a href="{{url('employee_export')}}">
+                                    <button class="btn btn-warning" type="button">Export</button>
+                                </a>
+                            </div>
                         </div>
-                    </form>
+                        <form method="POST" action="{{url('employee/delete_checklist/{id}')}}">
+                            @csrf
+                            <div class="table-responsive">
+                                <table id="employeesTable" class="table table-responsive table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" class="checkbox" id="delete_data" name="delete_data"></th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($employees as $employee)
+                                        <tr>
+                                            <td><input type="checkbox" class="checkbox-inline" name="delete_employee[]" value="{{$employee->id}}"></td>
+                                            <td>{{$employee->name}}</td>
+                                            <td>{{$employee->phone_number}}</td>
+                                            <td>{{$employee->email}}</td>
+                                            <td>{{$employee->address}}</td>
+                                            <td>
+                                                <a href="{{url('employee/edit/'.$employee->id)}}">
+                                                    <button class="btn btn-primary">Edit</button>
+                                                </a>
+                                                <a href="{{url('employee/delete/'.$employee->id)}}">
+                                                    <button class="btn btn-danger">Delete</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <input type="submit" class="btn btn-danger" name="delete_data" value="Delete marked employee datas">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
