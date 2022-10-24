@@ -51,9 +51,9 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id = 1)
+    public function show($id)
     {
-        return $id;
+        //
     }
 
     /**
@@ -64,7 +64,8 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+        return view('employee.edit', compact('employee'));
     }
 
     /**
@@ -76,7 +77,13 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+        $employee->name = $request->name;
+        $employee->phone_number = $request->phone_number;
+        $employee->email = $request->email;
+        $employee->address = $request->address;
+        $employee->save();
+        return Redirect('/employee');
     }
 
     /**

@@ -52,7 +52,8 @@ Route::prefix('/employee')->group(function () {
 
     // PUT or PATCH
     Route::get('/edit/{id}', [EmployeesController::class, 'edit'])->name('employee.edit');
-    Route::patch('/{id}', [EmployeesController::class, 'update'])->name('employee.update');
+    // Route::patch('/{id}', [EmployeesController::class, 'update'])->name('employee.update');
+    Route::post('/{id}', [EmployeesController::class, 'update'])->name('employee.update');
 
     // DELETE
     Route::delete('/{id}', [EmployeesController::class, 'destroy'])->name('employee.destroy');

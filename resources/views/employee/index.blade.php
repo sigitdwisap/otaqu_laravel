@@ -67,6 +67,7 @@
                         <table id="employeesTable" class="table table-responsive table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
+                                    <th><input type="checkbox" class="checkbox" id="employee_checklist" name="employee_checklist"></th>
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
@@ -77,13 +78,18 @@
                             <tbody>
                                 @foreach ($employees as $employee)
                                 <tr>
+                                    <td><input type="checkbox" class="checkbox-inline" name="delete_employee_checklist" value="{{$employee->id}}"></td>
                                     <td>{{$employee->name}}</td>
                                     <td>{{$employee->phone_number}}</td>
                                     <td>{{$employee->email}}</td>
                                     <td>{{$employee->address}}</td>
                                     <td>
-                                        <button class="btn btn-primary">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
+                                        <a href="{{url('employee/edit/'.$employee->id)}}">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                        <a href="{{url('employee/delete/'.$employee->id)}}">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
