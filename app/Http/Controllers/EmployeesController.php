@@ -17,7 +17,7 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        $employees = Employee::limit(10000)->get();
+        $employees = Employee::all();
         return view('employee.index', compact('employees'));
     }
 
